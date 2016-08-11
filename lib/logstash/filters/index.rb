@@ -12,36 +12,36 @@ class LogStash::Filters::Example < LogStash::Filters::Base
   # configure this filter from your Logstash config.
   #
   # filter {
-  #   example {
-  #     message => "My message..."
+  #   increment {
+  #     uniqueid => [ "fieldname" ]
   #   }
   # }
   #
-  config_name "example"
+  config_name "increment"
 
   # Replace the message with this value.
-  config :message, :validate => :string, :default => "Hello World!"
+  config :uniqueid, :validate => :integer
 
 
   public
   def register
     # Add instance variables
+    i=0
   end # def register
 
   public
   def filter(event)
-
-    if @message
-      # Replace the event message with our message as configured in the
-      # config file.
-
-      # using the event.set API
-      event.set("message", @message)
-      # correct debugging log statement for reference
-      # using the event.get API
-      @logger.debug? && @logger.debug("Message is now: #{event.get("message")}")
+    
+    uniqueid(event) if @uniqueid
+    
+     def uniqueid(event)
+    #
+    @uniqueid.each do |field|
+      result = i++
+      event.set(field, result)
     end
-
+  end
+  
     # filter_matched should go in the last line of our successful code
     filter_matched(event)
   end # def filter
