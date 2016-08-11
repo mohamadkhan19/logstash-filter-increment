@@ -12,12 +12,12 @@ class LogStash::Filters::Example < LogStash::Filters::Base
   # configure this filter from your Logstash config.
   #
   # filter {
-  #   increment {
+  #   index {
   #     uniqueid => [ "fieldname" ]
   #   }
   # }
   #
-  config_name "increment"
+  config_name "index"
 
   # Replace the message with this value.
   config :uniqueid, :validate => :integer
