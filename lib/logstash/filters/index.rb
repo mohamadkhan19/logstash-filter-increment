@@ -20,29 +20,35 @@ class LogStash::Filters::Example < LogStash::Filters::Base
   config_name "index"
 
   # Replace the message with this value.
-  config :uniqueid, :validate => :integer
+  config :uniqueid, :validate => :array
 
 
   public
   def register
     # Add instance variables
-    i=0
   end # def register
 
   public
   def filter(event)
     
     uniqueid(event) if @uniqueid
-    
-     def uniqueid(event)
-    #
-    @uniqueid.each do |field|
-      result = i++
-      event.set(field, result)
-    end
-  end
-  
-    # filter_matched should go in the last line of our successful code
+     # filter_matched should go in the last line of our successful code
     filter_matched(event)
   end # def filter
+  
+     
+   private 
+    $i = 0
+     def uniqueid(event)
+    #
+   
+    @uniqueid.each do |field|
+      $i = ($i + 1) 
+      event[field] = $i
+    end # end @uniqueid.each do
+    end # end def uniqueid(event)
+  
+  
+   
+  
 end # class LogStash::Filters::Example
