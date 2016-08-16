@@ -6,7 +6,7 @@ require "logstash/namespace"
 # message field with whatever you specify in the configuration.
 #
 # It is only intended to be used as an example.
-class LogStash::Filters::Example < LogStash::Filters::Base
+class LogStash::Filters::Index < LogStash::Filters::Base
 
   # Setting the config_name here is required. This is how you
   # configure this filter from your Logstash config.
@@ -40,8 +40,7 @@ class LogStash::Filters::Example < LogStash::Filters::Base
    private 
     $i = 0
      def uniqueid(event)
-    #
-   
+    
     @uniqueid.each do |field|
       $i = ($i + 1) 
       event[field] = $i
@@ -51,4 +50,4 @@ class LogStash::Filters::Example < LogStash::Filters::Base
   
    
   
-end # class LogStash::Filters::Example
+end # class LogStash::Filters::Index
